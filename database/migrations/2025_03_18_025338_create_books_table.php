@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('cover')->nullable();
             $table->text('body');
-            $table->time('published_at');
+            $table->time('published_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
