@@ -12,6 +12,10 @@ class Book extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     public function author() {
         return $this->belongsTo(Author::class);
     }

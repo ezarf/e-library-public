@@ -42,7 +42,7 @@
                         <h5 class="text-lg font-bold"><a href="/hall/{{ $book->slug }}" class="hover:text-blue-500">{{ $book->name }}</a></h5>
                         <div class="flex items-center text-gray-600 text-sm gap-4 mt-2">
                             <span class="flex items-center gap-1"><i class="fa-solid fa-user text-blue-600"></i> <a href="/hall/author/{{ $book->author->slug }}" class="hover:text-blue-500">{{ $book->author->name }}</a></span>
-                            <span class="flex items-center gap-1"><i class="fa-solid fa-clock text-yellow-300"></i> {{ optional($books[0]->published_at)->diffForHumans() ?? 'Belum Terbit' }}</span>
+                            <span class="flex items-center gap-1"><i class="fa-solid fa-clock text-yellow-300"></i> {{ optional($book->published_at)->diffForHumans() ?? 'Belum Terbit' }}</span>
                         </div>
                         <p class="text-gray-700 mt-2">{{ Str::limit($book->body, 150) }}</p>
                         <a href="/hall/{{ $book->slug }}" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Read more</a>
@@ -50,5 +50,10 @@
                 </div>
             @endforeach
         </div>
+    </div>
+
+    {{-- pagination --}}
+    <div class="mt-6">
+        {{ $books->links() }}
     </div>
 @endsection
