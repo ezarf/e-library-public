@@ -22,11 +22,13 @@ Route::get('/hall/{book:slug}', [HallController::class, 'detailBook']);
 Route::get('/hall/author/{author:slug}', [HallController::class, 'bookByAuthor']);
 Route::get('/hall/category/{category:slug}', [HallController::class, 'bookByCategory']);
 
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::get('/registration', [LoginController::class, 'registration']);
-Route::post('/registration', [LoginController::class, 'store']);
+Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+Route::get('/registration', [LoginController::class, 'registration'])->middleware('guest');
+Route::post('/registration', [LoginController::class, 'store'])->middleware('guest');
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->middleware(['auth', 'isAdmin']);

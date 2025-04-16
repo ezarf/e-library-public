@@ -45,9 +45,33 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
-            return redirect()->intended('/dashboard');
+            $user = Auth::user();
+            $role = $user->role;
+
+            switch ($role) {
+                case 'admin':
+                    return redirect()->intended('/dashboard');
+                    break;
+                case 'user':
+                    return redirect()->intended('/');
+                    break;
+                default:
+                    Auth::logout();
+                    return back()->with('error', "Role akun tidak dikenali, silahkan hubungi admin!!");
+            }
         }
 
         return back()->with('error', "Login failed!!");
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
