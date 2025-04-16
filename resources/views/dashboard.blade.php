@@ -1,0 +1,1 @@
+<p>ini halaman dashboard {{ auth()->user()->name }}</p>
