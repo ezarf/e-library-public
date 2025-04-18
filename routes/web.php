@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -29,9 +30,14 @@ Route::post('/registration', [LoginController::class, 'store'])->middleware('gue
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::prefix('dashboard')->middleware(['auth', 'isAdmin'])->group(function () {
-
     Route::get('/', function () {
         return view('dashboard.dashboard', ['title' => 'Dashboard']);
     })->middleware(['auth', 'isAdmin']);
 
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::get('/category/create', [CategoryController::class, 'create']);
+    Route::post('/category', [CategoryController::class, 'store']);
+    Route::get('/category/{category:slug}/edit', [CategoryController::class, 'edit']);
+    Route::put('/category/{category:slug}', [CategoryController::class, 'update']);
+    Route::delete('/category/{category:slug}', [CategoryController::class, 'destroy']);
 });

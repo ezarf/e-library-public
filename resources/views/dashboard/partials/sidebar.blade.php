@@ -12,6 +12,12 @@
                 <span class="text-sm">Dashboard</span>
             </a>
         </li>
+        <li class="mb-1 group">
+            <a href="/dashboard/category" class="{{ request()->is('dashboard/category*') ? 'bg-gray-950 text-white' : '' }} flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <i class="fa-solid fa-list mr-3"></i>
+                <span class="text-sm">Category</span>
+            </a>
+        </li>
         {{-- <span class="text-gray-400 font-bold">PERSONAL</span>
         <li class="mb-1 group">
             <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
