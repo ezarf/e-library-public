@@ -30,6 +30,16 @@
           </div>
 
 		      <div>
+            <label for="slug" class="block text-sm/6 font-medium text-gray-900">Slug</label>
+            <div class="mt-2">
+              <input type="text" name="slug" id="slug" autocomplete="slug" value="{{ old('slug') }}" required class="@error('slug') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+              @error('slug')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p> 
+              @enderror
+            </div>
+          </div>
+
+		      <div>
             <label for="email" class="block text-sm/6 font-medium text-gray-900">Email</label>
             <div class="mt-2">
               <input type="text" name="email" id="email" autocomplete="email" value="{{ old('email') }}" required class="@error('email') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
@@ -62,6 +72,24 @@
         </p>
       </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const nameInput = document.getElementById('name');
+      const slugInput = document.getElementById('slug');
+  
+      nameInput.addEventListener('input', function () {
+        const slug = nameInput.value
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9\s-]/g, '') // Hapus karakter non-alfanumerik
+          .replace(/\s+/g, '-')         // Ganti spasi dengan tanda hubung
+          .replace(/-+/g, '-');         // Ganti beberapa tanda hubung dengan satu
+  
+        slugInput.value = slug;
+      });
+    });
+  </script>
   
 </body>
 </html>

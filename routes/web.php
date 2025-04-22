@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -40,4 +43,8 @@ Route::prefix('dashboard')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/category/{category:slug}/edit', [CategoryController::class, 'edit']);
     Route::put('/category/{category:slug}', [CategoryController::class, 'update']);
     Route::delete('/category/{category:slug}', [CategoryController::class, 'destroy']);
+
+    Route::resource('author', AuthorController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('book', BookController::class);
 });

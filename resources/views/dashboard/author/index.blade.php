@@ -8,7 +8,7 @@
             {{ session('success') }}
         </p> 
       @endif  
-      <a href="/dashboard/category/create" class="px-5 py-3 bg-sky-300 rounded-md text-gray-500 hover:bg-sky-400 transition"><i class="fa-solid fa-square-plus"></i> Tambah category</a>
+      <a href="/dashboard/author/create" class="px-5 py-3 bg-sky-300 rounded-md text-gray-500 hover:bg-sky-400 transition"><i class="fa-solid fa-square-plus"></i> Tambah author</a>
     </div>
   </div>
 
@@ -30,18 +30,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category)
+                @foreach ($authors as $author)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                         <td class="px-6 py-4">
-                            {{ $category->name }}
+                            {{ $author->name }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $category->slug }}
+                            {{ $author->slug }}
                         </td>
                         <td class="px-6 py-4 flex gap-2">
-                            <a class="text-yellow-500" href="/dashboard/category/{{ $category->slug }}/edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            <a class="text-yellow-500" href="/dashboard/author/{{ $author->slug }}/edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                             |
-                            <form action="/dashboard/category/{{ $category->slug }}" method="POST">
+                            <form action="/dashboard/author/{{ $author->slug }}" method="POST">
                               @csrf
                               @method('delete')
                               <button type="submit" onclick="return confirm('Are you sure?')" class="text-red-500 hover:cursor-pointer"><i class="fa-solid fa-trash"></i> Delete</button>
