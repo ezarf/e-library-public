@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\HomeController;
@@ -31,6 +32,8 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('gue
 Route::get('/registration', [LoginController::class, 'registration'])->middleware('guest');
 Route::post('/registration', [LoginController::class, 'store'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
+Route::post('/borrow', [BorrowController::class, 'store'])->middleware('auth');
 
 Route::prefix('dashboard')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/', function () {
