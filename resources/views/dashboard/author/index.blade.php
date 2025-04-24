@@ -30,6 +30,7 @@
                 </tr>
             </thead>
             <tbody>
+              @if ($authors->count())
                 @foreach ($authors as $author)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                         <td class="px-6 py-4">
@@ -49,8 +50,20 @@
                         </td>
                     </tr> 
                 @endforeach
+              @else
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                  <td colspan="3" class="px-6 py-4 text-center text-white">
+                      Belum ada data authors.
+                  </td>
+                </tr>
+              @endif
+                
             </tbody>
         </table>
+        {{-- pagination --}}
+          <div class="mt-6">
+            {{ $authors->links() }}
+        </div>
       </div>
     </div>
   </div>

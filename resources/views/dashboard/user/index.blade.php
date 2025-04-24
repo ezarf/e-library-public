@@ -63,6 +63,10 @@
                 @endforeach
             </tbody>
         </table>
+        {{-- pagination --}}
+        <div class="mt-6">
+            {{ $users->links() }}
+        </div>
       </div>
     </div>
   </div>

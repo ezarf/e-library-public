@@ -39,38 +39,46 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($books as $book)
+                @if ($books->count())
+                    @foreach ($books as $book)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                            <td class="px-6 py-4">
+                                {{ $book->name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                @if ($book->cover)
+                                    <img class="w-24" src="{{ Storage::url($book->cover) }}" alt="">
+                                @else
+                                    <img class="w-24" src="https://picsum.photos/400/300" alt="">
+                                @endif
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ optional($book->published_at)->format('d F Y') ?? 'Belum Terbit' }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $book->category->name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $book->author->name }}
+                            </td>
+                            <td class="px-6 py-4 flex gap-2">
+                                <a class="text-yellow-500" href="/dashboard/book/{{ $book->slug }}/edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                |
+                                <form action="/dashboard/book/{{ $book->slug }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" onclick="return confirm('Are you sure?')" class="text-red-500 hover:cursor-pointer"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </form>
+                            </td>
+                        </tr> 
+                    @endforeach
+                @else
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                        <td class="px-6 py-4">
-                            {{ $book->name }}
+                        <td colspan="6" class="px-6 py-4 text-center text-white">
+                            Belum ada data data buku.
                         </td>
-                        <td class="px-6 py-4">
-                            @if ($book->cover)
-                                <img class="w-24" src="{{ Storage::url($book->cover) }}" alt="">
-                            @else
-                                <img class="w-24" src="https://picsum.photos/400/300" alt="">
-                            @endif
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ optional($book->published_at)->format('d F Y') ?? 'Belum Terbit' }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $book->category->name }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $book->author->name }}
-                        </td>
-                        <td class="px-6 py-4 flex gap-2">
-                            <a class="text-yellow-500" href="/dashboard/book/{{ $book->slug }}/edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                            |
-                            <form action="/dashboard/book/{{ $book->slug }}" method="POST">
-                              @csrf
-                              @method('delete')
-                              <button type="submit" onclick="return confirm('Are you sure?')" class="text-red-500 hover:cursor-pointer"><i class="fa-solid fa-trash"></i> Delete</button>
-                            </form>
-                        </td>
-                    </tr> 
-                @endforeach
+                    </tr>
+                @endif
             </tbody>
         </table>
         {{-- pagination --}}

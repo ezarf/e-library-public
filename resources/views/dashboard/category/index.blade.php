@@ -30,27 +30,40 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                        <td class="px-6 py-4">
-                            {{ $category->name }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $category->slug }}
-                        </td>
-                        <td class="px-6 py-4 flex gap-2">
-                            <a class="text-yellow-500" href="/dashboard/category/{{ $category->slug }}/edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                            |
-                            <form action="/dashboard/category/{{ $category->slug }}" method="POST">
-                              @csrf
-                              @method('delete')
-                              <button type="submit" onclick="return confirm('Are you sure?')" class="text-red-500 hover:cursor-pointer"><i class="fa-solid fa-trash"></i> Delete</button>
-                            </form>
-                        </td>
-                    </tr> 
-                @endforeach
+                @if ($categories->count())
+                  @foreach ($categories as $category)
+                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                          <td class="px-6 py-4">
+                              {{ $category->name }}
+                          </td>
+                          <td class="px-6 py-4">
+                              {{ $category->slug }}
+                          </td>
+                          <td class="px-6 py-4 flex gap-2">
+                              <a class="text-yellow-500" href="/dashboard/category/{{ $category->slug }}/edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                              |
+                              <form action="/dashboard/category/{{ $category->slug }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" onclick="return confirm('Are you sure?')" class="text-red-500 hover:cursor-pointer"><i class="fa-solid fa-trash"></i> Delete</button>
+                              </form>
+                          </td>
+                      </tr> 
+                  @endforeach
+                @else
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                    <td colspan="3" class="px-6 py-4 text-center text-white">
+                        Belum ada data category.
+                    </td>
+                  </tr>
+                @endif
+
             </tbody>
         </table>
+        {{-- pagination --}}
+        <div class="mt-6">
+            {{ $categories->links() }}
+        </div>
       </div>
     </div>
   </div>
