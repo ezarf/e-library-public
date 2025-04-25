@@ -79,7 +79,7 @@
                   @endforeach
                 @else
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                    <td colspan="3" class="px-6 py-4 text-center text-white">
+                    <td colspan="6" class="px-6 py-4 text-center text-white">
                         Belum ada data borrow.
                     </td>
                   </tr>

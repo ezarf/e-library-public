@@ -9,6 +9,9 @@
             <div class="ml-10 flex items-baseline space-x-4">
                 <a href="/" class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}" aria-current="page">Homepage</a>
                 <a href="/hall" class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('hall*') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}" aria-current="page">Hall</a>
+                @auth
+                    <a href="/borrow/{{ auth()->user()->slug }}" class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('borrow*') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}" aria-current="page">Borrow</a>
+                @endauth
                 <a href="/about" class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('about*') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}" aria-current="page">About</a>
 
             </div>
@@ -84,6 +87,9 @@
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="/" class="block rounded-md px-3 py-2 text-base font-medium {{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}" aria-current="page">Homepage</a>
                 <a href="/hall" class="block rounded-md px-3 py-2 text-base font-medium {{ request()->is('hall*') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}" aria-current="page">Hall</a>
+                @auth
+                    <a href="/borrow/{{ auth()->user()->slug }}" class="block rounded-md px-3 py-2 text-base font-medium {{ request()->is('borrow*') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}" aria-current="page">Borrow</a>  
+                @endauth
                 <a href="/about" class="block rounded-md px-3 py-2 text-base font-medium {{ request()->is('about*') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}" aria-current="page">About</a>
             </div>
             <div class="border-t border-gray-700 pt-4 pb-3">
